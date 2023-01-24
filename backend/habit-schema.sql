@@ -1,11 +1,7 @@
--- Weeks Table: users foreign key, habits foreign key, wk 1, wk 2,...
--- Habit Table: habit id, habit name, count, goal, ttl count, users foreign key
--- Users Table: username, password
-
 CREATE TABLE users (
     username VARCHAR(50) PRIMARY KEY,
     password TEXT NOT NULL
-)
+);
 
 CREATE TABLE habits (
     id SERIAL PRIMARY KEY,
@@ -15,14 +11,14 @@ CREATE TABLE habits (
     total_count INTEGER CHECK (total_count >= 0) DEFAULT 0,
     username VARCHAR(50) NOT NULL
         REFERENCES users ON DELETE CASCADE
-)
+);
 
 CREATE TABLE weeks (
     username VARCHAR(50) NOT NULL
         REFERENCES users ON DELETE CASCADE,
     habit_id INTEGER
         REFERENCES habits ON DELETE CASCADE,
-    PRIMARY KEY (username, habit_id),
+    FOREIGN KEY (username, habit_id),
     week_1 INTEGER DEFAULT NULL,
     week_2 INTEGER DEFAULT NULL,
     week_3 INTEGER DEFAULT NULL,
@@ -73,5 +69,5 @@ CREATE TABLE weeks (
     week_49 INTEGER DEFAULT NULL,
     week_50 INTEGER DEFAULT NULL,
     week_51 INTEGER DEFAULT NULL,
-    week_52 INTEGER DEFAULT NULL,
-)
+    week_52 INTEGER DEFAULT NULL
+);
